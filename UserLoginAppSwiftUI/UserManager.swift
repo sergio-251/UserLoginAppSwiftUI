@@ -8,14 +8,32 @@
 import Combine
 
 final class UserManager: ObservableObject {
-    @Published var isLogIn = false
-    var name: String = ""
+    @Published var user = User()
+    
+    var isLogIn: Bool {
+        user.isLogIn
+    }
+    
+    var name: String {
+        user.name
+    }
+    
+    private init() {}
+    
+    init(user: User) {
+        self.user = user
+    }
 
     func logOut() {
-        isLogIn = false
+        user.isLogIn = false
     }
     
     func logIn() {
-        isLogIn = true
+        user.isLogIn = true
     }
+}
+
+struct User: Codable {
+    var name = ""
+    var isLogIn = false
 }

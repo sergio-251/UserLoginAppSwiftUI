@@ -12,7 +12,7 @@ struct RegisterView: View {
     @State private var buttonDisabled = true
     @State private var countColor = Color.red
     
-    @EnvironmentObject private var user: UserManager
+    @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
         VStack {
@@ -43,8 +43,9 @@ struct RegisterView: View {
     
     private func registerUser() {
         if isValidName(userName) {
-            user.name = userName
-            user.isLogIn = true
+            userManager.user.name = userName
+            userManager.user.isLogIn = true
+            DataManager.shared.saveData(user: userManager.user)
         }
     }
     

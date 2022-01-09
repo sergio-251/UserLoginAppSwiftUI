@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
-    @EnvironmentObject private var user: UserManager
+    @EnvironmentObject private var userManager: UserManager
     
     var body: some View {
         VStack {
-            Text("Hi, \(user.name)")
+            Text("Hi, \(userManager.user.name)")
                 .font(.system(size: 40))
                 .bold()
             Spacer()
@@ -33,7 +33,8 @@ struct ContentView: View {
     }
     
     private func logOut() {
-        user.isLogIn = false
+        userManager.user.isLogIn = false
+        DataManager.shared.uploadData(userManager: userManager)
     }
 }
 

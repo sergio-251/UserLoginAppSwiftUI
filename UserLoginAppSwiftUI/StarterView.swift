@@ -23,6 +23,6 @@ struct StarterView: View {
 struct StarterView_Previews: PreviewProvider {
     static var previews: some View {
         StarterView()
-            .environmentObject(UserManager())
+            .environmentObject(UserManager(user: User()))
     }
 }
