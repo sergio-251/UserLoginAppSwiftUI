@@ -8,9 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var timer = TimeCounter()
+    @EnvironmentObject private var user: UserManager
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text("Hi, \(user.name)")
+                .font(.system(size: 40))
+                .bold()
+            Spacer()
+            Text("\(timer.counter)")
+                .font(.largeTitle)
+                .bold()
+            Spacer()
+            StartButtonView(timer: timer) {
+                timer.startTimer()
+            }
+            Spacer()
+            LogOutButtonView() {
+                logOut()
+            }
+        }
+        .padding()
+    }
+    
+    private func logOut() {
+        user.isLogIn = false
     }
 }
 
